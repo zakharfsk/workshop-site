@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+    <main>
+        <div class="wrapper">
+            <section class="cards-section">
+                <div class="section-content">
+                    {% for project in projects %}
+                        <figure class="card">
+                            <figcaption>
+                                <p class="card-title">{{ project.title }}</p>
+                                <p class="card-desc">{{ project.description }}</p>
+                                <a href="{{ project.github_repo_url }}" class="card-more">Project on GitHub</a>
+                            </figcaption>
+                        </figure>
+                    {% endfor %}
+                </div>
+            </section>
+        </div>
+    </main>
+{% endblock %}

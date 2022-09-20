@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+    <main>
+        <div class="wrapper">
+            <section class="cards-section">
+                <div class="section-content">
+                    {% for skill in skills %}
+                        {% if skill.is_published %}
+                            <figure class="card">
+                                <figcaption>
+                                    <p class="card-title">{{ skill.title }}</p>
+                                    <a href="{{ skill.get_absolute_url }}" class="card-more">Детальніше</a>
+                                </figcaption>
+                            </figure>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            </section>
+        </div>
+    </main>
+{% endblock %}

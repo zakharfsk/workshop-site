@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+    <main>
+        <div class="wrapper">
+            <section class="cards-section">
+                <div class="section-content">
+                    {% for job_experience in job_experiences %}
+                        {% if job_experience.is_published %}
+                            <figure class="card">
+                                <figcaption>
+                                    <p class="card-title">{{ job_experience.title }}</p>
+                                    <p class="card-desc">{{ job_experience.description | truncatechars:50 }}</p>
+                                    <a href="{{ job_experience.get_absolute_url }}" class="card-more">Детальніше</a>
+                                </figcaption>
+                            </figure>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            </section>
+        </div>
+    </main>
+
+{% endblock %}

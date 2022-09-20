@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+    <main>
+        <div class="wrapper">
+            <section class="cards-section">
+                <div style="font-size: 25px">
+                    Skill: {{ skill.title }}<br>
+                    Знання: {{ skill.rate }}<br>
+                    Опис: <br>
+                    {% autoescape off %}
+                        {{ skill.description }}<br>
+                    {% endautoescape %}
+                </div>
+            </section>
+        </div>
+    </main>
+{% endblock %}

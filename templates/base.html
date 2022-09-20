@@ -1,0 +1,53 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ title }}</title>
+    <link rel="icon" href="{% static 'img/logo_icon.ico' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+<header>
+    <div class="wrapper">
+        <div class="header-menu">
+            <div class="header-logo">
+                <a href="{% url 'home' %}"><img src="{% static 'img/logo.png' %}" alt="Logo"></a>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="{% url 'home' %}">Home</a></li>
+                    <li><a href="{% url 'experience_job' %}">Досвід роботи</a></li>
+                    <li><a href="{% url 'skills' %}">Мої навички</a></li>
+                    <li><a href="{% url 'projects' %}">Мої проекти</a></li>
+                    <li><a href="https://github.com/zakharfsk" target="_blank">GitHub</a></li>
+                    <li><a href="https://t.me/hoyochka" target="_blank">Telegram</a></li>
+                    {% if user.is_authenticated %}
+                        <li><a href="">{{ user.username }}</a></li>
+                        <li><a href="{% url 'logout_page' %}">Logout</a></li>
+                    {% else %}
+                        <li><a href="{% url 'auth_page' %}">Login</a></li>
+                    {% endif %}
+                </ul>
+            </nav>
+        </div>
+        <div class="header-content">
+            <p>{{ p_header_english }}</p>
+            <h1>{{ h1_header }}</h1>
+            {% autoescape off %}
+                <h3>{{ h3_description }}</h3>
+            {% endautoescape %}
+        </div>
+    </div>
+</header>
+{% block content %}
+{% endblock %}
+<footer>
+    <div class="wrapper">
+        <p>&copy; 2022 Mass Impressions & Tranmautritam. Make the right impression.</p>
+    </div>
+</footer>
+</body>
+</html>

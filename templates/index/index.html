@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+    <main>
+        <div class="wrapper">
+            <section class="cards-section">
+                <div class="section-title">
+                    <p>{{ p_header_english_card }}</p>
+                    <h2>{{ h2_header_card }}</h2>
+                    <h3>{{ h3_description_card }}</h3>
+                </div>
+                <div class="section-content">
+                    {% for education in educations %}
+                        <figure class="card">
+                            <div class="card-img-box">
+                                <img src="{% static education.image_src %}" alt="Card alt">
+                            </div>
+                            <figcaption>
+                                <p class="card-title">{{ education.title }}</p>
+                                <p class="card-desc">{{ education.description }}</p>
+                            </figcaption>
+                        </figure>
+                    {% endfor %}
+                </div>
+            </section>
+        </div>
+    </main>
+{% endblock %}

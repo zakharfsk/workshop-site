@@ -1,5 +1,5 @@
 """
-ASGI config for Workshop_MyResume project.
+ASGI config for MyResume project.
 
 It exposes the ASGI callable as a module-level variable named ``application``.
 
@@ -11,6 +11,6 @@ import os
 
 from django.core.asgi import get_asgi_application
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'Workshop_MyResume.settings')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'MyResume.settings')
 
 application = get_asgi_application()

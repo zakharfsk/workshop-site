@@ -21,7 +21,7 @@ class MyJobExperience(models.Model):
     title = models.CharField(max_length=255)
     company = models.CharField(max_length=255, blank=True)
     time_start = models.DateField()
-    time_end = models.DateField(blank=True, null=True)
+    time_end = models.DateField(null=True)
     description = models.TextField()
     is_published = models.BooleanField(default=True)
 

@@ -1,6 +1,7 @@
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from django.shortcuts import render, redirect
+
 from .forms import LoginForm, RegisterForm
 from .models import MyJobExperience, MySkills, MyProject
 
@@ -49,34 +50,33 @@ def auth_page(request):
     }
 
     if request.method == 'POST':
-        match request.POST['type']:
-            case 'login':
-                form = LoginForm(request.POST)
-                if form.is_valid():
-                    username = form.cleaned_data['username']
-                    password = form.cleaned_data['password']
+        if request.POST['type'] == 'login':
+            form = LoginForm(request.POST)
+            if form.is_valid():
+                username = form.cleaned_data['username']
+                password = form.cleaned_data['password']
+                user = authenticate(username=username, password=password)
+                if user is not None:
+                    login(request, user)
+                    return redirect('home')
+                else:
+                    context['error'] = 'Неправильний логін або пароль'
+
+        elif request.POST['type'] == 'register':
+            form = RegisterForm(request.POST)
+            if form.is_valid():
+                username = form.cleaned_data['username']
+                password = form.cleaned_data['password1']
+
+                if not User.objects.filter(username=username).exists():
+                    form.save()
+
                     user = authenticate(username=username, password=password)
-                    if user is not None:
-                        login(request, user)
-                        return redirect('home')
-                    else:
-                        context['error'] = 'Неправильний логін або пароль'
+                    login(request, user)
 
-            case 'register':
-                form = RegisterForm(request.POST)
-                if form.is_valid():
-                    username = form.cleaned_data['username']
-                    password = form.cleaned_data['password1']
-
-                    if not User.objects.filter(username=username).exists():
-                        form.save()
-
-                        user = authenticate(username=username, password=password)
-                        login(request, user)
-
-                        return redirect('home')
-                    else:
-                        context['error'] = 'Користувач з таким ім\'ям вже існує'
+                    return redirect('home')
+                else:
+                    context['error'] = 'Користувач з таким ім\'ям вже існує'
 
     return render(request, 'index/auth.html', context)
 
